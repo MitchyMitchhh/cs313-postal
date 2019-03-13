@@ -3,10 +3,14 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.set("views", "views");
-app.set("view engine", "ejs");
 
-app.use(express.static("public"));
+
+app.use(express.static(__dirname + '/public'));
+
+app.set('views', __dirname + '/views');
+
+//app.set("views", "views");
+app.set("view engine", "ejs");
 
 app.get("/calculate", calculatePostal);
 
@@ -37,7 +41,7 @@ function calculatePostal(request, response) {
             cost = 1;
         }
     }
-    else if (postalType == "metered") {
+    else if (postalType == "metered") {//i love mikelle
         if (weight <= 1) {
             cost = 0.5;
         }
